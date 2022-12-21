@@ -7,12 +7,12 @@ const mongoose = require("mongoose");
 const userRoute = require("./routes/userRoute");
 const clientDetailRouter = require("./routes/ClientDetailRouter");
 const globalErrHandler = require("./utils/globalErrHandler");
-dotenv.config({ path: "./config.env" });
+dotenv.config({ path: "./.env" });
 const app = express();
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://mernauthentication.netlify.app",
     credentials: true,
   })
 );

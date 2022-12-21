@@ -93,7 +93,8 @@ const login = async (req, res, next) => {
       .cookie("jwt_auth", token, {
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
         httpOnly: true,
-        secure: false,
+        sameSite: "none",
+        secure: true,
       })
       .json({
         status: "success",
@@ -207,7 +208,13 @@ const resetPassword = async (req, res, next) => {
 const logout = (req, res, next) => {
   try {
     // console.log(req.cookies, "logout");
-    res.clearCookie("jwt_auth");
+    // res.clearCookie("jwt_auth");
+    res.cookie("jwt_auth", "loggedOut", {
+      // expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
     // console.log(req.cookies);
     res.status(200).json({
       status: "success",
