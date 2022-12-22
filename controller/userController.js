@@ -217,6 +217,7 @@ const logout = (req, res, next) => {
         httpOnly: true,
         secure: true,
         sameSite: "none",
+        path: "/",
       })
       .status(200)
       .json({
