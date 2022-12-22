@@ -162,9 +162,9 @@ const forgotPassword = async (req, res, next) => {
     }
     const token = user.createPasswordResetToken();
     await user.save({ validateBeforeSave: false });
-    const resetPasswordUrl = `<a href="http://localhost:3000/resetPassword/${token}">Click here to reset password</a>
+    const resetPasswordUrl = `<a href="https://mernauthentication.vercel.app/resetPassword/${token}">Click here to reset password</a>
       <h4>If this above link doesn't work then copy this url to your browser.</h4>
-      <h4>http://localhost:3000/resetPassword/${token}</h4>
+      <h4>https://mernauthentication.vercel.app/resetPassword/${token}</h4>
     `;
     await Mailer(email, resetPasswordUrl, "Reset password");
     res.status(200).json({
