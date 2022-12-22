@@ -225,6 +225,13 @@ const logout = (req, res, next) => {
   }
 };
 
+const getInfo = (req, res, next) => {
+  res.status(200).json({
+    status: "success",
+    message: "conntected successfully",
+  });
+};
+
 module.exports = {
   signUp,
   login,
@@ -234,4 +241,5 @@ module.exports = {
   resetPassword,
   logout,
   verifyOTP,
+  getInfo,
 };

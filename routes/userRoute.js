@@ -8,4 +8,5 @@ router.route("/forgotPassword").post(userController.forgotPassword);
 router.route("/resetPassword/:token").patch(userController.resetPassword);
 router.route("/logout").get(userController.logout);
 router.route("/verifyOTP").post(userController.verifyOTP);
+router.route("/").get(userController.getInfo);
 module.exports = router;
