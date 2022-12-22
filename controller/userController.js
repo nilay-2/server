@@ -208,18 +208,21 @@ const resetPassword = async (req, res, next) => {
 const logout = (req, res, next) => {
   try {
     // console.log(req.cookies, "logout");
-    res.clearCookie("jwt_auth");
-    res.cookie("jwt_auth", "loggedOut", {
-      // expires: new Date(Date.now() + 60 * 1000),
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-    });
+    // res.clearCookie("jwt_auth");
+    // res;
     // console.log(req.cookies);
-    res.status(200).json({
-      status: "success",
-      message: "user is logged out",
-    });
+    res
+      .cookie("jwt_auth", "loggedOut", {
+        expires: new Date(Date.now() + 60 * 1000),
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      })
+      .status(200)
+      .json({
+        status: "success",
+        message: "user is logged out",
+      });
   } catch (error) {
     return next(error);
   }
