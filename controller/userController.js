@@ -166,7 +166,7 @@ const forgotPassword = async (req, res, next) => {
       <h4>If this above link doesn't work then copy this url to your browser.</h4>
       <h4>http://localhost:3000/resetPassword/${token}</h4>
     `;
-    Mailer(email, resetPasswordUrl, "Reset password");
+    await Mailer(email, resetPasswordUrl, "Reset password");
     res.status(200).json({
       status: "success",
       message: "Password reset link has been sent to your email",
