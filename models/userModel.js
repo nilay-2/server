@@ -61,7 +61,7 @@ userSchema.pre("save", function (next) {
 
 userSchema.methods.jwtExpired = function (jwtTimeStamp) {
   if (this.passwordChangedAt) {
-    const passChangeTime = this.passwordChangedAt.getTime() / 1000;
+    const passChangeTime = this.passwordChangedAt.getTime();
     // console.log("jwt", jwtTimeStamp, "pass", passChangeTime);
     return jwtTimeStamp < passChangeTime;
   }
