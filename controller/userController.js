@@ -201,7 +201,7 @@ const resetPassword = async (req, res, next) => {
     });
     res
       .cookie("jwt_auth", jwtToken, {
-        expires: new Date(Date.now() + 60 * 1000),
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
         httpOnly: true,
         secure: true,
         sameSite: "none",
