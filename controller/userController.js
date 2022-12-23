@@ -217,6 +217,7 @@ const logout = (req, res, next) => {
         httpOnly: true,
         secure: true,
         sameSite: "none",
+        domain: "mernauthentication.vercel.app",
       })
       .status(200)
       .json({
