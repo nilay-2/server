@@ -196,10 +196,21 @@ const resetPassword = async (req, res, next) => {
     user.resetPasswordToken = undefined;
     user.resetPasswordTokenExpiry = undefined;
     await user.save();
-    res.status(200).json({
-      status: "success",
-      message: "Password changed successfully",
+    const jwtToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRY,
     });
+    res
+      .cookie("jwt_auth", jwtToken, {
+        expires: new Date(Date.now() + 60 * 1000),
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      })
+      .status(200)
+      .json({
+        status: "success",
+        message: "Password changed successfully",
+      });
   } catch (error) {
     return next(error);
   }
