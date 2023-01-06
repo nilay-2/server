@@ -40,23 +40,25 @@ const upload = multer({
 
 exports.fileParser = upload.single("file");
 
-exports.resizeUserPhoto = async (req, res, next) => {
-  console.log(req.file);
+exports.resizeUserPhoto = (req, res, next) => {
   if (!req.file) return next();
   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
-  const file = await sharp(req.file.buffer)
+  sharp(req.file.buffer)
     .resize(500, 500)
     .toFormat("jpeg")
-    .jpeg({ quality: 90 });
+    .jpeg({ quality: 90 })
+    .toBuffer()
+    .then((data) => {
+      const base64data = data.toString("base64");
+      res.status(200).json({ data: base64data, contentType: "image/jpeg" });
+    });
   // .toFile(`public/img/users/${req.file.filename}`);
-  console.log(file);
-  next();
 };
 
-exports.fileUploader = (req, res, next) => {
-  res.status(200).json({
-    status: "success",
-    message: "file uploaded successfully",
-    file: req.file,
-  });
-};
+// exports.fileUploader = (req, res, next) => {
+//   res.status(200).json({
+//     status: "success",
+//     message: "file uploaded successfully",
+//     file: req.buffer,
+//   });
+// };
