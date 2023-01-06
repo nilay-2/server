@@ -9,11 +9,13 @@ router
 
 router.route("/getUsers").get(clientDetailController.getAllUserOnQuery);
 
-router.route("/uploadFile").post(
-  userController.protect,
-  clientDetailController.fileParser,
-  // clientDetailController.resizeUserPhoto,
-  clientDetailController.fileUploader
-);
+router
+  .route("/uploadFile")
+  .post(
+    userController.protect,
+    clientDetailController.fileParser,
+    clientDetailController.resizeUserPhoto,
+    clientDetailController.fileUploader
+  );
 
 module.exports = router;
