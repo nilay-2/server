@@ -14,6 +14,7 @@ router
   .post(
     userController.protect,
     clientDetailController.fileParser,
+    clientDetailController.resizeUserPhoto,
     clientDetailController.fileUploader
   );
 
