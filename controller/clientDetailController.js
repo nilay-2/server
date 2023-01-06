@@ -1,6 +1,6 @@
 const User = require("../models/userModel");
-
-const getClientDetails = async (req, res, next) => {
+const multer = require("multer");
+exports.getClientDetails = async (req, res, next) => {
   try {
     res.status(200).json({
       status: "success",
@@ -13,7 +13,7 @@ const getClientDetails = async (req, res, next) => {
   }
 };
 
-const getAllUserOnQuery = async (req, res, next) => {
+exports.getAllUserOnQuery = async (req, res, next) => {
   try {
     const { username } = req.query;
     const regex = new RegExp(`${username}`);
@@ -32,4 +32,17 @@ const getAllUserOnQuery = async (req, res, next) => {
   }
 };
 
-module.exports = { getClientDetails, getAllUserOnQuery };
+const multerStorage = multer.memoryStorage();
+const upload = multer({
+  storage: multerStorage,
+});
+
+exports.fileParser = upload.single("file");
+
+exports.fileUploader = (req, res, next) => {
+  console.log(req.file);
+  res.status(200).json({
+    status: "success",
+    message: "file uploaded successfully",
+  });
+};

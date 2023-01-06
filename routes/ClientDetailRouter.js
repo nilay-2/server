@@ -8,4 +8,13 @@ router
   .get(userController.protect, clientDetailController.getClientDetails);
 
 router.route("/getUsers").get(clientDetailController.getAllUserOnQuery);
+
+router
+  .route("/uploadFile")
+  .post(
+    userController.protect,
+    clientDetailController.fileParser,
+    clientDetailController.fileUploader
+  );
+
 module.exports = router;
